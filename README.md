@@ -1,5 +1,8 @@
-This is a relatively basic Neural Network that I made into a class, to make breaking it down and modifying it easier.
+This is a relatively basic Neural Network that I made into
+a class, to make breaking it down and modifying it easier.
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Note: You will need to edit line 89 to match your File Path
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
                     PROGRAM INFORMATION
