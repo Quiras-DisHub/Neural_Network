@@ -1,0 +1,5 @@
+tensorflow
+matplotlib
+numpy
+#I have seen similar networks were Pandas was used over Numpy.
+#I chose Numpy because I con't know how to use Pandas as well.
