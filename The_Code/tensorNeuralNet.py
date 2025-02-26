@@ -62,7 +62,7 @@ class NeuralNetwork:
         self.numpy_val_binary_accuracy = np.array(self.history.history['val_binary_accuracy'])
         np.savetxt(path+"loss_history.txt",    self.numpy_loss_history,        delimiter="\n")
         np.savetxt(path+"binary_accuracy.txt", self.numpy_binary_accuracy,     delimiter="\n")
-        np.savetxt(path+"binary_accuracy.txt", self.numpy_val_binary_accuracy, delimiter="\n")
+        np.savetxt(path+"val_binary_accuracy.txt", self.numpy_val_binary_accuracy, delimiter="\n")
         print(np.mean(self.numpy_binary_accuracy))
         print(self.model.predict(self.X).round())
 
