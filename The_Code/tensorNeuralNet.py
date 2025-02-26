@@ -29,12 +29,21 @@ class NeuralNetwork:
         self.Y = np.array(([1],[0],[0],[0],[0],[0],[0],[1]), dtype=float)
         self.model = tf.keras.Sequential()
 
+# Changing the seed for the Model allows you to either create different
+# results every time or if the seed is the same your results will be the same.
     def set_seed(self, seed):
         np.random.seed(seed)
         random.seed(seed)
         tf.random.set_seed(seed)
         os.environ['PYTHONHASHSEED'] = str(seed)
-    
+
+# Starting Neurons determines the number of neurons in the first layer
+# Usually the more complex the problem the more neurons you need to start with
+# This current set up is layer divisible by 2, so each subsequent layer will half half the neurons
+# Starting Dropout is the percentage of neurons that will be dropped out if they
+# Are not giving valid results per epoch. This maintains a clean progression
+# Layers is the number of layers you want in your model
+# The more layers you need for more complex issues but this comes at a cost of training speed
     def create_model(self, startingNeurons, startingDropout, layers=2):
         self.model.add(Dense(startingNeurons, input_dim=3, activation='relu', use_bias=True)) # Layer: 1
         self.model.add(Dropout(startingDropout))
@@ -47,7 +56,12 @@ class NeuralNetwork:
                 self.model.add(Dropout(startingDropout))
         self.model.add(Dense(1, activation='sigmoid', use_bias=True))
         return layers
-    
+
+# Rate is the learning rate, the lower the rate the slower the model learns but the more accurate
+# Faster rates will train faster but at the expense of accuracy in certain cases
+# Epochs is the number of times the model will run through the data
+# Patience is the number of epochs to wait before stopping the model
+# This is usefull if your model reaches the desired level of acccuracy earlier then set epochs
     def train_model(self, rate=0.01, epochs=2000, patience=50):
         optimizer = tf.keras.optimizers.Adam(learning_rate=rate)
         self.model.compile(loss='binary_crossentropy', optimizer=optimizer, metrics=['binary_accuracy'])
@@ -83,8 +97,8 @@ class NeuralNetwork:
     
     def run_model(self):
         self.set_seed(int(input("SEED >>> ")))
-        layers = self.create_model(64, 0.4, 8)
-        self.train_model(0.01, 2000, 50)
+        layers = self.create_model(64, 0.4, 8) # 64 Neurons, 0.4 Dropout, 8 Layers
+        self.train_model(0.01, 2000, 50)       # Learning Rate, Epochs, Patience
         ### Change Path as required to your 'Neural_Network/History_Data' folder location ###
         self.save_history('Neural_Network/History_Data')
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
